@@ -7,5 +7,5 @@ RUN apk add "github-cli~=${GH_VERSION}"
 VOLUME /gh
 WORKDIR /gh
 
-ENTRYPOINT ["gh"]
-CMD ["--help"]
+ENTRYPOINT [ "gh" ]
+CMD [ "--help" ]
