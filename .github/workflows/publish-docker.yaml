@@ -19,7 +19,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ github.repository }}
+            ${{ github.actor }}/gh
           tags: |
             type=semver,pattern={{major}}
             type=semver,pattern={{major}}.{{minor}}
