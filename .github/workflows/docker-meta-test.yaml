@@ -23,6 +23,7 @@ jobs:
             ${{ github.actor }}/gh
           tags: |
             type=match,pattern=v(.*),group=1,value=v2.29.0-r4
+            type=match,pattern=v(\d+\.\d+)\.\d+-r.*,group=1,value=v2.29.0-r4
             type=match,pattern=v(\d+\.\d+\.\d+)-r.*,group=1,value=v2.29.0-r4
             type=raw,value=latest
             type=sha
