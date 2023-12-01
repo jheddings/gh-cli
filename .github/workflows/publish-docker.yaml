@@ -14,18 +14,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # TODO extract semantic version from tag (e.g. v2.29.0-r3)
       - name: Initialize Docker metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v5.2.0
         with:
           images: |
             ${{ github.actor }}/gh
           tags: |
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{version}}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=match,pattern=v(.*),group=1
+            type=match,pattern=v(\d+\.\d+)\.\d+-r.*,group=1
+            type=match,pattern=v(\d+\.\d+\.\d+)-r.*,group=1
+            type=raw,value=latest
             type=sha
 
       - name: Set up QEMU
