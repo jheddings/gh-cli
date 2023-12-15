@@ -1,6 +1,6 @@
 # gh-cli #
 
-A basic Docker image for running `gh` in CI environments.
+A basic Docker image for running the GitHub CLI (`gh`) in CI environments.
 
 ## Usage ##
 
@@ -10,13 +10,30 @@ to the `gh` command.
 For example, to display the current version of `gh` in the image:
 
 ```
-docker run --rm jheddings/gh:latest --version
+docker run jheddings/gh:latest --version
 ```
 
-Or, to clone this repository:
+## Auhentication ##
+
+The `gh` CLI uses a token for access.  This will be set as an environment variable when
+running in a container.  To test your token, try the following:
 
 ```
-docker run --rm jheddings/gh:latest repo clone jheddings/gh
+docker run --env GITHUB_TOKEN=$MY_GH_TOKEN \
+  jheddings/gh:latest auth status
+```
+
+In the above example, put your generated developer token in place of `$MY_GH_TOKEN` (or
+use an environment variable accordingly).
+
+## Working Directory ##
+
+The image declares a single volume, `/gh`, which is used as the working directory.  One
+option for cloning the Notional repository to the current folder would be:
+
+```
+docker run --env GITHUB_TOKEN=$MY_GH_TOKEN --volume .:/gh \
+  jheddings/gh:latest repo clone jheddings/notional
 ```
 
 ## Kubernetes ##
