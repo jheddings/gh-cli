@@ -1,6 +1,6 @@
 FROM alpine:3.19.0
 
-RUN apk add github-cli
+RUN apk add --no-cache github-cli
 
 VOLUME /gh
 WORKDIR /gh
